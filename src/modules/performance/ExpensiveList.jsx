@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 
-export default function ExpensiveList({ filterText }) {
+function ExpensiveList({ filterText }) {
   const renderCountRef = useRef(0);
 
   useEffect(() => {
@@ -26,3 +26,5 @@ export default function ExpensiveList({ filterText }) {
     </div>
   );
 }
+
+export default memo(ExpensiveList);
