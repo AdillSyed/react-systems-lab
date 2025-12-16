@@ -1,4 +1,4 @@
-import {useState, useRef} from "react";
+import {useState, useEffect, useRef} from "react";
 import ExpensiveList from "./ExpensiveList";
 const styles = {
   page: {
@@ -32,8 +32,12 @@ export default function PerformanceDashboard() {
     const [theme, setTheme] = useState("light");
     const [filterText, setFilterText] = useState("");
 
-    let renderCount = useRef(0);
-    renderCount.current += 1;
+    const renderCountRef = useRef(0);
+
+    useEffect(() => {
+      renderCountRef.current += 1;
+      console.log("Parent renders:", renderCountRef.current);
+    });
 
   return (
     <div style={styles.page}>
@@ -69,7 +73,7 @@ export default function PerformanceDashboard() {
       {/* Render Info */}
       <section style={styles.card}>
         <h2>Render Info</h2>
-        <p>Parent renders: {renderCount.current}</p>
+        <p>Parent renders: {renderCountRef.current}</p>
         <p>List renders: --</p>
       </section>
 
