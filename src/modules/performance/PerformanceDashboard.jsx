@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from "react";
+import {useState, useEffect, useRef, useCallback} from "react";
 import ExpensiveList from "./ExpensiveList";
 const styles = {
   page: {
@@ -38,6 +38,10 @@ export default function PerformanceDashboard() {
       renderCountRef.current += 1;
       console.log("Parent renders:", renderCountRef.current);
     });
+
+    const handleItemClick = useCallback(() => {
+      console.log("Item clicked");
+    }, [])
 
   return (
     <div style={styles.page}>
@@ -82,7 +86,7 @@ export default function PerformanceDashboard() {
         <h2>Expensive List</h2>
 
         <div style={styles.listContainer}>
-          <ExpensiveList filterText={filterText} />
+          <ExpensiveList filterText={filterText} onItemClick={handleItemClick}/>
           <p>List placeholder</p>
         </div>
       </section>
